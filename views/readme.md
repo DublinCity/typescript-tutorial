@@ -1,0 +1,1 @@
+define view that will be rendered

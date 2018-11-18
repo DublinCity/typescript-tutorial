@@ -1,0 +1,1 @@
+static assets that will be used Client side
