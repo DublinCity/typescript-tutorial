@@ -1,28 +1,34 @@
-import Sequelize, { SequelizeStatic } from "sequelize";
+import * as SequelizeStatic from "sequelize";
+import {DataTypes, Sequelize} from "sequelize";
+import { ICellAttributes, ICellInstance } from "./cell-interface";
 
-const cell = (sequelize: Sequelize.Sequelize, DataType: SequelizeStatic) => {
-  return sequelize.define("cell", {
+const cell = (sequelize: Sequelize, dataType: DataTypes): SequelizeStatic.Model<ICellInstance, ICellAttributes> => {
+  return sequelize.define<ICellInstance, ICellAttributes>("cell", {
     childrenId: {
       allowNull: false,
-      type: DataType.STRING(100),
+      type: dataType.STRING(100),
     },
     created_at: {
       allowNull: false,
       defaultValue: sequelize.literal("now()"),
-      type: DataType.DATE,
+      type: dataType.DATE,
     },
     index: {
       allowNull: false,
-      type: DataType.STRING(100),
+      type: dataType.STRING(100),
       unique: true,
     },
     parentId: {
       allowNull: false,
-      type: DataType.STRING(10),
+      type: dataType.STRING(10),
     },
     title: {
       allowNull: true,
-      type: DataType.STRING(100),
+      type: dataType.STRING(100),
     },
+  }, {
+    timestamps: false,
   });
 };
+
+export default cell;

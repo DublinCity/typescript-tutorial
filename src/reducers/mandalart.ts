@@ -1,4 +1,5 @@
 import uuid from "uuid/v4";
+import { Cell } from "../models";
 
 interface ICell {
   childrenId: string[];
@@ -33,6 +34,12 @@ const getCellById = (id: string): ICell => {
 const addCell = ({parentId, title}: {parentId: s, title: s}): void => {
   const id = uuid();
   // console.log(title);
+  Cell.create({
+    childrenId: "3",
+    index: "7",
+    parentId,
+    title,
+  });
   DB[id] = {
     childrenId: [],
     date: new Date(),

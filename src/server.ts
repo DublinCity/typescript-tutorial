@@ -8,7 +8,6 @@ import { sequelize } from "./models";
 
 const app = express();
 sequelize.sync();
-
 app.use(logger("dev"));
 
 app.use(express.static(path.join(__dirname, "public")));
@@ -41,6 +40,6 @@ app.use("/mandalart", mandalart);
 //   });
 // });
 
-app.listen(3000, () => {
+app.listen(3030, () => {
   console.log("express listen on port:3000");
 });

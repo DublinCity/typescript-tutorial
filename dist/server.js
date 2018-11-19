@@ -8,7 +8,9 @@ const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
 const path_1 = __importDefault(require("path"));
 const mandalart_1 = __importDefault(require("./controllers/mandalart"));
+const models_1 = require("./models");
 const app = express_1.default();
+models_1.sequelize.sync();
 app.use(morgan_1.default("dev"));
 app.use(express_1.default.static(path_1.default.join(__dirname, "public")));
 app.set("views", path_1.default.join(__dirname, "/../views"));
@@ -34,7 +36,7 @@ app.use("/mandalart", mandalart_1.default);
 //     message: err.message,
 //   });
 // });
-app.listen(3000, () => {
+app.listen(3030, () => {
     console.log("express listen on port:3000");
 });
 //# sourceMappingURL=server.js.map

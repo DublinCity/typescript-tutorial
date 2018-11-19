@@ -1,21 +1,31 @@
-import Sequelize from "sequelize";
+import SequelizeStatic from "sequelize";
+import {DataTypes, Sequelize} from "sequelize";
+import cell from "./cell";
 const env = process.env.NODE_ENV || "development";
-import Config from "../config/config.json";
+import Config from "../config/config";
 
-interface IConfig {
-  username: string;
-  password: string;
-  database: string;
-  host: string;
-  dialect: string;
+const config = Config[env];
+
+class Database {
+  private sequelize: Sequelize;
+  private dataType: DataTypes;
+  constructor() {
+    this.sequelize = new SequelizeStatic(config.database, config.username, config.password, config);
+    this.dataType = SequelizeStatic;
+  }
+
+  public getSequelize() {
+    return this.sequelize;
+  }
+
+  public getDataType() {
+    return this.dataType;
+  }
 }
 
-const localConfig: { [key: string]: IConfig } = Config;
-const config = localConfig[env];
+const database = new Database();
 
-const sequelize = new Sequelize(config.database, config.username, config.password, config);
+export const sequelize = database.getSequelize();
+export const DataType = database.getDataType();
 
-export {
-  sequelize,
-  Sequelize,
-};
+export const Cell = cell(sequelize, DataType);
