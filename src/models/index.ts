@@ -1,5 +1,4 @@
-import SequelizeStatic from "sequelize";
-import {DataTypes, Sequelize} from "sequelize";
+import SequelizeStatic, {DataTypes, Sequelize} from "sequelize";
 import cell from "./cell";
 const env = process.env.NODE_ENV || "development";
 import Config from "../config/config";

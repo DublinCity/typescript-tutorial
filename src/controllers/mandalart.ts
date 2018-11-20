@@ -4,7 +4,6 @@ import { addCell, editCellById, getAllCell, getCellById } from "../reducers/mand
 const router = express.Router();
 
 router.use((req, res, next) => {
-  // console.log("API: mandalart");
   next();
 });
 
@@ -15,8 +14,8 @@ router.get("/", (req, res) => {
 
 router.post("/", (req, res) => {
   // register cell
-  // console.log("s", req.body);
-  const {title, parentId}: {title: s, parentId: s} = req.body;
+  // console.log("string", req.body);
+  const {title, parentId}: {title: string, parentId: string} = req.body;
 
   addCell({title, parentId});
   res.end("add success");
@@ -24,14 +23,14 @@ router.post("/", (req, res) => {
 
 router.get("/:id", (req, res) => {
   // access model
-  const {id}: {id: s} = req.params;
+  const {id}: {id: string} = req.params;
   const cell = getCellById(id);
 
   res.json(cell);
 });
 
 router.put("/:id", (req, res) => {
-  const {id, body}: {id: s, body: any} = req.params;
+  const {id, body}: {id: string, body: any} = req.params;
   editCellById(id, body);
 });
 export default router;

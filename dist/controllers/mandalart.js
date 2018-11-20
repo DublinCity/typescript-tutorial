@@ -7,7 +7,6 @@ const express_1 = __importDefault(require("express"));
 const mandalart_1 = require("../reducers/mandalart");
 const router = express_1.default.Router();
 router.use((req, res, next) => {
-    // console.log("API: mandalart");
     next();
 });
 router.get("/", (req, res) => {
@@ -16,7 +15,7 @@ router.get("/", (req, res) => {
 });
 router.post("/", (req, res) => {
     // register cell
-    // console.log("s", req.body);
+    // console.log("string", req.body);
     const { title, parentId } = req.body;
     mandalart_1.addCell({ title, parentId });
     res.end("add success");

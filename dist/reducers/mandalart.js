@@ -14,7 +14,7 @@ const DB = {
     },
 };
 const getAllCell = () => {
-    const allCells = Object.keys(DB).map((id) => DB[id]);
+    const allCells = Object.keys(DB).map(id => DB[id]);
     return allCells;
 };
 exports.getAllCell = getAllCell;
@@ -25,20 +25,13 @@ const getCellById = (id) => {
 exports.getCellById = getCellById;
 const addCell = ({ parentId, title }) => {
     const id = v4_1.default();
-    // console.log(title);
+    console.log(parentId, title);
     models_1.Cell.create({
         childrenId: "3",
         index: "7",
         parentId,
         title,
     });
-    DB[id] = {
-        childrenId: [],
-        date: new Date(),
-        parentId,
-        title,
-    };
-    DB[parentId] = Object.assign({}, DB[parentId], { childrenId: DB[parentId].childrenId.concat(id) });
 };
 exports.addCell = addCell;
 const editCellById = (id, body) => {

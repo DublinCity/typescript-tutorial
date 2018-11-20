@@ -22,7 +22,7 @@ const DB: IGeneralObj = {
 };
 
 const getAllCell = (): ICell[] => {
-  const allCells = Object.keys(DB).map((id): ICell => DB[id]);
+  const allCells = Object.keys(DB).map(id => DB[id]);
   return allCells;
 };
 
@@ -31,29 +31,19 @@ const getCellById = (id: string): ICell => {
   return cell;
 };
 
-const addCell = ({parentId, title}: {parentId: s, title: s}): void => {
+const addCell = ({parentId, title}: {parentId: string, title: string}): void => {
   const id = uuid();
-  // console.log(title);
+  console.log(parentId,title)
   Cell.create({
     childrenId: "3",
     index: "7",
     parentId,
     title,
   });
-  DB[id] = {
-    childrenId: [],
-    date: new Date(),
-    parentId,
-    title,
-  };
-  DB[parentId] = {
-    ...DB[parentId],
-    childrenId: DB[parentId].childrenId.concat(id),
-  };
 };
 
-const editCellById = (id: s, body: any): boolean => {
-  const title: s = body.title;
+const editCellById = (id: string, body: any): boolean => {
+  const title: string = body.title;
   try {
       DB[id] = {
       ...DB[id],

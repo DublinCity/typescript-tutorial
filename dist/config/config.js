@@ -3,8 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Config = {
     development: {
         username: "root",
-        password: "dublincity",
-        database: "mandalart",
+        password: "Dublincity123!",
+        database: "sample",
         host: "127.0.0.1",
         dialect: "mysql",
     },

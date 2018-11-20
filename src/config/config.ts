@@ -13,8 +13,8 @@ interface IConfig {
 const Config: IConfig = {
   development: {
     username: "root",
-    password: "dublincity",
-    database: "mandalart",
+    password: "Dublincity123!",
+    database: "sample",
     host: "127.0.0.1",
     dialect: "mysql",
   },
