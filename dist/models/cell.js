@@ -2,6 +2,19 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const cell = (sequelize, dataType) => {
     return sequelize.define("cell", {
+        index: {
+            allowNull: false,
+            type: dataType.STRING(100),
+            unique: true,
+        },
+        title: {
+            allowNull: true,
+            type: dataType.STRING(100),
+        },
+        parentId: {
+            allowNull: false,
+            type: dataType.STRING(10),
+        },
         childrenId: {
             allowNull: false,
             type: dataType.STRING(100),
@@ -10,19 +23,6 @@ const cell = (sequelize, dataType) => {
             allowNull: false,
             defaultValue: sequelize.literal("now()"),
             type: dataType.DATE,
-        },
-        index: {
-            allowNull: false,
-            type: dataType.STRING(100),
-            unique: true,
-        },
-        parentId: {
-            allowNull: false,
-            type: dataType.STRING(10),
-        },
-        title: {
-            allowNull: true,
-            type: dataType.STRING(100),
         },
     }, {
         timestamps: false,

@@ -1,0 +1,16 @@
+extends layout
+block content
+  .wrapper
+    input(id="index" placeholder="index")
+    input(id="title" placeholder="title")
+    input(id="parentId" placeholder="parentId")
+    input(id="childrenId" placeholder="childrenId")
+
+  .wrapper
+    input(type="button" value="register" name="register")
+    input(type="button" value="edit" name="edit")
+
+  .result
+    ul(id="ulTag")
+block scripts
+  script(src='/index.js')

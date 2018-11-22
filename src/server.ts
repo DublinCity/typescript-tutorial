@@ -3,6 +3,7 @@ import express, { ErrorRequestHandler } from "express";
 import logger from "morgan";
 import path from "path";
 
+import { NextFunction } from "connect";
 import { Request } from "express-serve-static-core";
 import mandalart from "./controllers/mandalart";
 import { sequelize } from "./models";
@@ -22,16 +23,19 @@ app.set("view engine", "pug");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-            app.get("/", (req, res) => {
-                    res.render("index");
-            });
+app.get("/", (req, res) => {
+  res.render("index");
+});
 
+app.use("/apiTest", (req, res) => {
+  res.render("apiTest");
+});
 app.use("/mandalart", mandalart);
 
 // // catch 404 and forward to error handler
 app.use((req, res, next) => {
   const err: IErrorWithStatus = new Error("Not Found");
-  err.status  = 404;
+  err.status = 404;
   next(err);
 });
 
@@ -40,11 +44,11 @@ app.use((req, res, next) => {
 app.use(((err, req, res, next) => {
   res.status(err.status || 500);
   res.render("error", {
-    error: (app.get("env") === "development") ? err : {},
+    error: app.get("env") === "development" ? err : {},
     message: err.message,
   });
 }) as ErrorRequestHandler);
 
 app.listen(3030, () => {
-  console.log("express listen on port:3000");
+  // console.log("express listen on port:3030");
 });

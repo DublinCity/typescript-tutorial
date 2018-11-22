@@ -20,6 +20,9 @@ app.use(express_1.default.urlencoded({ extended: false }));
 app.get("/", (req, res) => {
     res.render("index");
 });
+app.use("/apiTest", (req, res) => {
+    res.render("apiTest");
+});
 app.use("/mandalart", mandalart_1.default);
 // // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -32,11 +35,11 @@ app.use((req, res, next) => {
 app.use(((err, req, res, next) => {
     res.status(err.status || 500);
     res.render("error", {
-        error: (app.get("env") === "development") ? err : {},
+        error: app.get("env") === "development" ? err : {},
         message: err.message,
     });
 }));
 app.listen(3030, () => {
-    console.log("express listen on port:3000");
+    // console.log("express listen on port:3030");
 });
 //# sourceMappingURL=server.js.map

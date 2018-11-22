@@ -1,48 +1,42 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const v4_1 = __importDefault(require("uuid/v4"));
-const models_1 = require("../models");
-const DB = {
-    5: {
-        childrenId: [],
-        date: new Date(),
-        parentId: "0",
-        title: "mandalart",
-    },
-};
-const getAllCell = () => {
-    const allCells = Object.keys(DB).map(id => DB[id]);
-    return allCells;
-};
-exports.getAllCell = getAllCell;
-const getCellById = (id) => {
-    const cell = DB[id];
-    return cell;
-};
-exports.getCellById = getCellById;
-const addCell = ({ parentId, title }) => {
-    const id = v4_1.default();
-    console.log(parentId, title);
-    models_1.Cell.create({
-        childrenId: "3",
-        index: "7",
-        parentId,
-        title,
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+Object.defineProperty(exports, "__esModule", { value: true });
+const models_1 = require("../models");
+const getAllCell = () => __awaiter(this, void 0, void 0, function* () { return yield models_1.Cell.findAll({}); });
+exports.getAllCell = getAllCell;
+const getCellById = (id) => __awaiter(this, void 0, void 0, function* () {
+    return yield models_1.Cell.findOne({
+        where: {
+            index: id,
+        },
+    });
+});
+exports.getCellById = getCellById;
+const addCell = ({ index, parentId, title, }) => __awaiter(this, void 0, void 0, function* () {
+    return yield models_1.Cell.create({
+        index,
+        parentId,
+        title,
+        childrenId: "",
+    });
+});
 exports.addCell = addCell;
-const editCellById = (id, body) => {
+const editCellById = (index, body) => __awaiter(this, void 0, void 0, function* () {
     const title = body.title;
-    try {
-        DB[id] = Object.assign({}, DB[id], { title });
-        return true;
-    }
-    catch (e) {
-        return false;
-    }
-};
+    return yield models_1.Cell.update({
+        title,
+    }, {
+        where: {
+            index,
+        },
+    });
+});
 exports.editCellById = editCellById;
 //# sourceMappingURL=mandalart.js.map

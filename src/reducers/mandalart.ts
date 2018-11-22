@@ -1,63 +1,43 @@
-import uuid from "uuid/v4";
-import { Cell } from "../models";
+import uuid from "uuid/v4"
+import { Cell } from "../models"
+import { ICellInstance } from "../models/cell-interface"
 
-interface ICell {
-  childrenId: string[];
-  date: Date;
-  parentId: string;
-  title: string;
-}
+const getAllCell = async () => await Cell.findAll({})
+const getCellById = async (id: string) =>
+  await Cell.findOne({
+    where: {
+      index: id
+    }
+  })
 
-interface IGeneralObj {
-  [id: string]: ICell;
-}
-
-const DB: IGeneralObj = {
-  5: {
-    childrenId: [],
-    date: new Date(),
-    parentId: "0",
-    title: "mandalart",
-  },
-};
-
-const getAllCell = (): ICell[] => {
-  const allCells = Object.keys(DB).map(id => DB[id]);
-  return allCells;
-};
-
-const getCellById = (id: string): ICell => {
-  const cell = DB[id];
-  return cell;
-};
-
-const addCell = ({parentId, title}: {parentId: string, title: string}): void => {
-  const id = uuid();
-  console.log(parentId,title)
-  Cell.create({
-    childrenId: "3",
-    index: "7",
+const addCell = async ({
+  index,
+  parentId,
+  title
+}: {
+  index: string
+  parentId: string
+  title: string
+}) =>
+  await Cell.create({
+    index,
     parentId,
     title,
-  });
-};
+    childrenId: ""
+  })
 
-const editCellById = (id: string, body: any): boolean => {
-  const title: string = body.title;
-  try {
-      DB[id] = {
-      ...DB[id],
-      title,
-      };
-      return true;
-  } catch (e) {
-      return false;
-  }
-};
+const editCellById = async (index: string, body: any) => {
+  const title: string = body.title
+  return await Cell.update(
+    {
+      title
+    },
+    {
+      where: {
+        index
+      }
+    }
+  )
+}
 
-export {
-  getAllCell,
-  getCellById,
-  addCell,
-  editCellById,
-};
+export { getAllCell, getCellById, addCell, editCellById }
